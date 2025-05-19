@@ -17,3 +17,8 @@ async def transcribe_audio(file: UploadFile = File(...)):
     result = model.transcribe(temp_filename, language="es",verbose=False, temperature=0.0)
     os.remove(temp_filename)
     return {"text": result["text"]}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
